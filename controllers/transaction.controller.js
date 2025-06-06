@@ -2,11 +2,12 @@ const Transaction = require('../models/transaction.model');
 
 exports.createTransaction = async (req, res) => {
   try {
-    const { amount, category } = req.body;
+    const { name,amount, category } = req.body;
     const userId = req.user.id;
 
     const newTransaction = await Transaction.create({
       user: userId,
+      name,
       amount,
       category
     });

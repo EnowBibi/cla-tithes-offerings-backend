@@ -4,6 +4,7 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "@nkwa-pay/sdk": "^0.1.4",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",

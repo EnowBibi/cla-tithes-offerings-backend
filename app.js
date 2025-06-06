@@ -3,6 +3,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 const app = express();
+const paymentRoutes = require('./routes/payment.routes');
 
 // Middleware
 app.use(cors());
@@ -20,5 +21,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/payment', paymentRoutes);
+
 
 module.exports = app;
