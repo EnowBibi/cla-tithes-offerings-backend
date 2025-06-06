@@ -1,0 +1,46 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+*.out
+
+# Environment Variables
+.env
+
+# Database
+*.local.db
+*.sqlite
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Optional: build artifacts
+dist/
+build/
+tmp/
+temp/
+
+# IDEs
+.vscode/
+.idea/
+*.sw?
+
+# Expo (if using Expo frontend here too)
+.expo/
+.expo-shared/
+
+# macOS and Linux
+*.pid
+
+# PM2 process logs
+pids/
+*.pid
+
+# Jest test coverage
+coverage/
