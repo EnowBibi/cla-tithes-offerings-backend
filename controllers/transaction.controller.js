@@ -1,23 +1,26 @@
 const Transaction = require('../models/transaction.model');
 
 exports.createTransaction = async (req, res) => {
-  try {
-    const { name,amount, category } = req.body;
-    const userId = req.user.id;
-
-    const newTransaction = await Transaction.create({
-      user: userId,
+   try {
+    console.log(req.body)
+    const { name, amount, phoneNumber, category, status, referenceId } = req.body;
+    const transaction = await Transaction.create({
+      user: req.user.id,
       name,
       amount,
-      category
+      phoneNumber,
+      category,
+      status,
+      referenceId,
     });
+    console.log(transaction)
+    res.status(201).json({ transaction });
+  }catch (err) {
+  console.error('Transaction error:', err); // Add this
+  res.status(500).json({ message: 'Failed to create transaction', error: err.message });
+}
 
-    res.status(201).json(newTransaction);
-  } catch (error) {
-    res.status(500).json({ message: 'Failed to create transaction', error: error.message });
-  }
 };
-
 exports.getUserTransactions = async (req, res) => {
   try {
     const userId = req.user.id;

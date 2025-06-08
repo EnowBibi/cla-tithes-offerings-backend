@@ -6,17 +6,25 @@ const pay = require('../services/mynkwa.service');
 router.post('/collect-payment', async (req, res) => {
   try {
     const { amount, phoneNumber } = req.body;
+
     if (!amount || !phoneNumber) {
       return res.status(400).json({ success: false, error: 'Amount and phoneNumber are required' });
     }
 
     const response = await pay.payments.collect({ amount, phoneNumber });
 
-    res.json({ success: true, data: response.payment });
+    // ✅ Return the full response directly as `data`
+    res.json({ success: true, data: response });
+
   } catch (err) {
-    res.status(err.statusCode || 500).json({ success: false, error: err.message || 'Internal server error' });
+    console.error("Payment error:", err);
+    res.status(err.statusCode || 500).json({
+      success: false,
+      error: err.message || 'Internal server error',
+    });
   }
 });
+
 
 // Disburse payment
 router.post('/disburse', async (req, res) => {
@@ -37,12 +45,16 @@ router.post('/disburse', async (req, res) => {
 // Get payment status
 router.get('/:id', async (req, res) => {
   try {
-    const response = await pay.payments.get(req.params.id);
-    console.log(response.payment)
-    res.json({ success: true, data: response.payment });
+    const response = await pay.payments.get({ id: req.params.id }); 
+    res.json({ success: true, data: response });
   } catch (err) {
-    res.status(err.statusCode || 500).json({ success: false, error: err.message || 'Internal server error' });
+    console.error('Payment status error:', err);
+    res.status(err.statusCode || 500).json({
+      success: false,
+      error: err.message || 'Internal server error',
+    });
   }
 });
+
 
 module.exports = router;

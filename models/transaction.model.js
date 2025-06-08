@@ -6,12 +6,16 @@ const transactionSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-  name:{
+  name: {
     type: String,
     required: true
   },
   amount: {
     type: Number,
+    required: true
+  },
+  phoneNumber: {
+    type: String,
     required: true
   },
   category: {
@@ -21,8 +25,10 @@ const transactionSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['Pending', 'Completed'],
-    default: 'Completed'
+    required: true
+  },
+  referenceId: {
+    type: String
   },
   createdAt: {
     type: Date,
