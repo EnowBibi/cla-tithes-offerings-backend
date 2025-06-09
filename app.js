@@ -4,7 +4,9 @@ const morgan = require('morgan');
 
 const app = express();
 const paymentRoutes = require('./routes/payment.routes');
-
+app.get('/', (req, res) => {
+  res.send('CLA Tithes and Offerings API is live');
+});
 // Middleware
 app.use(cors());
 app.use(morgan('dev'));
